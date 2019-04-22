@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Navigation from './components/Navigation';
 import { todos } from './todos.json'
+import TodoForm from './components/TodoForm';
 
 class App extends Component {
 constructor(){
@@ -10,7 +11,22 @@ constructor(){
   this.state={
     todos
   }
+  this.handleAddTodo=this.handleAddTodo.bind(this);
 }
+removeTodo(index) {
+   this.setState({
+     todos: this.state.todos.filter((e, i) => {
+       return i !== index
+     })
+   });
+
+ }
+
+ handleAddTodo(todo) {
+   this.setState({
+     todos: [...this.state.todos, todo]
+   })
+ }
   render() {
     const todos=this.state.todos.map((todo,i)=>{
       return (
@@ -41,12 +57,22 @@ constructor(){
           </span>
         </a>
       </nav>
-          <img src={logo} className="App-logo" alt="logo" />
-        <div className="container">
-          <div className="row mt-4">
-            {todos}
+
+      <div className="container">
+        <div className="row mt-4">
+
+          <div className="col-md-4 text-center">
+              <img src={logo} className="App-logo" alt="logo" />
+            <TodoForm onAddTodo={this.handleAddTodo}></TodoForm>
+          </div>
+
+          <div className="col-md-8">
+            <div className="row">
+              {todos}
+            </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }

@@ -14,7 +14,7 @@ class TodoForm extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault();//evita refrescar la pagina
     this.props.onAddTodo(this.state);
     this.setState({
       title: '',
